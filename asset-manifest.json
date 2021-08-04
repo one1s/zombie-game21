@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/zombie-game21/static/css/main.f6c31f70.chunk.css",
+    "main.js": "/zombie-game21/static/js/main.03774008.chunk.js",
+    "main.js.map": "/zombie-game21/static/js/main.03774008.chunk.js.map",
+    "runtime-main.js": "/zombie-game21/static/js/runtime-main.43225e55.js",
+    "runtime-main.js.map": "/zombie-game21/static/js/runtime-main.43225e55.js.map",
+    "static/js/2.e29d2a93.chunk.js": "/zombie-game21/static/js/2.e29d2a93.chunk.js",
+    "static/js/2.e29d2a93.chunk.js.map": "/zombie-game21/static/js/2.e29d2a93.chunk.js.map",
+    "index.html": "/zombie-game21/index.html",
+    "precache-manifest.b330042d15f6a6a2915595aae076383d.js": "/zombie-game21/precache-manifest.b330042d15f6a6a2915595aae076383d.js",
+    "service-worker.js": "/zombie-game21/service-worker.js",
+    "static/css/main.f6c31f70.chunk.css.map": "/zombie-game21/static/css/main.f6c31f70.chunk.css.map",
+    "static/js/2.e29d2a93.chunk.js.LICENSE": "/zombie-game21/static/js/2.e29d2a93.chunk.js.LICENSE",
+    "static/media/App.css": "/zombie-game21/static/media/walls.b102b800.jpg",
+    "static/media/ZombiePreview.css": "/zombie-game21/static/media/zombierun.08087132.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.43225e55.js",
+    "static/js/2.e29d2a93.chunk.js",
+    "static/css/main.f6c31f70.chunk.css",
+    "static/js/main.03774008.chunk.js"
+  ]
+}
