@@ -40,6 +40,7 @@ const MyWeb3 ={
                     }else{
                         reject('Unknow Your ChainId:'+currentChainId)
                     }
+                //console.log(window.version.network())
                 })
             }).catch(function (error) {
                 console.log(error)
@@ -102,26 +103,77 @@ const MyWeb3 ={
             })
         })
     },
+    // getNetWorkId(){
+    //     return new Promise((resolve, reject) => {
+    //         //开始调用metamask
+    //         ethereum.enable().then(function (accounts) {
+    //             //初始化provider
+    //             let provider = window.web3.currentProvider || window['ethereum'] 
+    //             //初始化Web3
+    //             window.web3 = new Web3(provider)
+    //             //获取到当前以太坊网络id
+    //             window.web3.eth.net.getId().then(function (result) {
+    //                 let currentChainId = result
+    //                 resolve(currentChainId)
+    //             })
+    //         }).catch(function (error) {
+    //             console.log(error)
+    //         })
+    //     })
+    // },
     //购买僵尸
     buyZombie(_name){
-        return new Promise((resolve, reject) => {
-            window.MyContract.methods.zombiePrice().call().then(function(zombiePrice) {
-                window.MyContract.methods.buyZombie(_name).send({from:window.defaultAccount,value:zombiePrice*10000000})
-                .on('transactionHash', function(transactionHash){
-                    resolve(transactionHash)
-                    console.log("on('transactionHash'"+transactionHash)
+            return new Promise((resolve, reject) => {
+            //let currentChainId = parseInt(window.ethereum.chainId, 16)
+            let ethereum = window.ethereum
+            //禁止自动刷新，metamask要求写的
+            ethereum.autoRefreshOnNetworkChange = false
+            //开始调用metamask
+            ethereum.enable().then(function (accounts) {
+                //初始化provider
+                let provider = window.web3.currentProvider || window['ethereum'] 
+                //初始化Web3
+                window.web3 = new Web3(provider)
+                //获取到当前以太坊网络id
+                window.web3.eth.net.getId().then(function (result) {
+                    let currentChainId = result
+                    let time = 1 
+                    if(currentChainId == 8285 || currentChainId == 2559){
+                        time = 10**7
+                    }
+                    console.log("time="+time)
+                    //设置最大监听器数量，否则出现warning
+                    window.web3.currentProvider.setMaxListeners(300)
+                    //从json获取到当前网络id下的合约地址
+                    let currentContractAddress = ContractAddress[currentChainId]
+                    console.log(currentChainId)
+                    if(currentContractAddress !== undefined){
+                        window.MyContract.methods.zombiePrice().call().then(function(zombiePrice) {
+                        window.MyContract.methods.buyZombie(_name).send({from:window.defaultAccount,value:zombiePrice*time})
+                        .on('transactionHash', function(transactionHash){
+                            resolve(transactionHash)
+                            console.log("on('transactionHash'"+transactionHash)
+                        })
+                        .on('confirmation', function(confirmationNumber, receipt){
+                            console.log({confirmationNumber:confirmationNumber,receipt:receipt})
+                        })
+                        .on('receipt', function(receipt){
+                            console.log({receipt:receipt})
+                            window.location.reload()
+                        })
+                        .on('error', function(error,receipt){
+                            console.log({error:error,receipt:receipt})
+                            reject({error:error,receipt:receipt})
+                        })
+                    })
+        
+                    }else{
+                        reject('Unknow Your ChainId:'+currentChainId)
+                    }
+                //console.log(window.version.network())
                 })
-                .on('confirmation', function(confirmationNumber, receipt){
-                    console.log({confirmationNumber:confirmationNumber,receipt:receipt})
-                })
-                .on('receipt', function(receipt){
-                    console.log({receipt:receipt})
-                    window.location.reload()
-                })
-                .on('error', function(error,receipt){
-                    console.log({error:error,receipt:receipt})
-                    reject({error:error,receipt:receipt})
-                })
+            }).catch(function (error) {
+                console.log(error)
             })
         })
     },
@@ -234,6 +286,7 @@ const MyWeb3 ={
     //出售我的僵尸
     saleMyZombie(_zombieId,_price){
         return new Promise((resolve, reject) => {
+            console.log("_price="+_price)
             window.MyContract.methods.saleMyZombie(_zombieId,window.web3.utils.toWei((_price).toString())).send({from:window.defaultAccount})
             .on('transactionHash', function(transactionHash){
                 resolve(transactionHash)
