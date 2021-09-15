@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "3f7d9102155dc5f43445eabb8660ee27",
+    "revision": "a23ec494a8bb68218c735673b0cc6818",
     "url": "/zombie-game21/index.html"
   },
   {
-    "revision": "b9a5be1d000e023d6223",
+    "revision": "3bf6eddffd97eae2933b",
     "url": "/zombie-game21/static/css/main.f6c31f70.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/zombie-game21/static/js/2.ca987788.chunk.js.LICENSE"
   },
   {
-    "revision": "b9a5be1d000e023d6223",
-    "url": "/zombie-game21/static/js/main.51f89237.chunk.js"
+    "revision": "3bf6eddffd97eae2933b",
+    "url": "/zombie-game21/static/js/main.032b5ba4.chunk.js"
   },
   {
     "revision": "a7dec51324169aa39fbf",
